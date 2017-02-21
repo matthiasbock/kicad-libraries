@@ -3,6 +3,7 @@
 .*.swp
 
 # Outputs
+*.pyc
 *.svg
 *.PcbLib
 
