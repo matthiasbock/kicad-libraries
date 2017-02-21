@@ -10,6 +10,7 @@ from package import *
 class issi_is61lv6416:
     def __init__(this):
         pins = CSV("issi_is61lv6416.csv").as_dict()
+        print pins
         this.packages = [Package("SOJ", 44, pins), Package("TSOP-II", 44, pins)]
 
     def generate_schematic_symbols(this):
