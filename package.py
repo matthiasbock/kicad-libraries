@@ -6,7 +6,7 @@
 # may have it's own unique pin assignment.
 #
 
-class Package:
+class package:
     #
     # Initialize with package name, e.g. "TQFP" and pins
     # Pins are a dictionary, where the key is the pin name and the value is the pin function. 
