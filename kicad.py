@@ -4,6 +4,9 @@
 #
 
 #
+# KiCAD file formats overview:
+# http://kicad-pcb.org/help/file-formats/
+#
 # KiCAD file format description:
 # https://www.compuphase.com/electronics/LibraryFileFormats.pdf
 #
