@@ -3,6 +3,9 @@
 # Regular expressions: for value parsing
 import re
 
+# In order to be able to export to KiCad file formats
+from kicad import *
+
 #
 # Class for reading and parsing ST CubeMX .ioc files
 #
@@ -28,6 +31,7 @@ class IOC:
     # Import .ioc file
     #
     def importFile(self, filename):
+        print("Importing CubeMX file "+filename+" ...")
         f = open(filename, "r")
         self.content = f.read()
         f.close()
@@ -110,3 +114,10 @@ class IOC:
                     signal = signal[2:]
                 self.netNames.append(signal)
                 print(self.pinNames[i]+" used as "+self.netNames[i])
+
+    #
+    # Export the MCU configuration as KiCad symbol
+    #
+    def generateKicadSymbol(self):
+        symbol = KicadSymbol()
+        return symbol

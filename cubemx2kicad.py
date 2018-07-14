@@ -12,8 +12,7 @@ iocFile.importFile(filename)
 
 print("=====")
 
-mcu = KicadSymbol()
-mcu.generateFromCubeMX(iocFile)
+mcu = iocFile.generateKicadSymbol()
 print(str(mcu))
 
 print("=====")
@@ -21,10 +20,10 @@ print("=====")
 lib = KicadSymbolLibrary()
 lib.addSymbol(mcu)
 print(str(lib))
-#lib.saveFile("test.lib")
 
-exit(0)
+print("=====")
 
 sch = KicadSchematic()
-sch.referenceLibrary("test.lib")
-sch.addSymbol(mcu, x, y)
+sch.addLibrary("test")
+sch.addSymbol(symbol=mcu, reference="U1", x=5000, y=5000)
+print(str(sch))
