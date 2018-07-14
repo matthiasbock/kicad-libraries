@@ -1,13 +1,30 @@
 #!/usr/bin/python
 
-from sys import argv
-from ioc import *
+from sys import argv, exit
+from cubemx import *
+from kicad import *
+
 
 filename = argv[1]
 
-ioc = IOC()
+iocFile = IOC()
+iocFile.importFile(filename)
 
-ioc.importFile(filename)
+print("=====")
 
-print(ioc.getPackage())
-print(ioc.getPinCount())
+mcu = KicadSymbol()
+mcu.generateFromCubeMX(iocFile)
+print(str(mcu))
+
+print("=====")
+
+lib = KicadSymbolLibrary()
+lib.addSymbol(mcu)
+print(str(lib))
+#lib.saveFile("test.lib")
+
+exit(0)
+
+sch = KicadSchematic()
+sch.referenceLibrary("test.lib")
+sch.addSymbol(mcu, x, y)
