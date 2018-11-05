@@ -43,6 +43,11 @@ if header.find("TE-Connectivity") < 0:
   (fp_line (start 9.525 -10.795) (end -9.525 -10.795) (layer F.SilkS) (width 0.15))
   (fp_line (start -9.525 -10.795) (end -9.525 5.08) (layer F.SilkS) (width 0.15))
   (fp_line (start 9.525 5.08) (end 9.525 -10.795) (layer F.SilkS) (width 0.15))
+
+  (fp_line (start -9.525 5.08) (end 9.525 5.08) (layer B.SilkS) (width 0.15))
+  (fp_line (start 9.525 -10.795) (end -9.525 -10.795) (layer B.SilkS) (width 0.15))
+  (fp_line (start -9.525 -10.795) (end -9.525 5.08) (layer B.SilkS) (width 0.15))
+  (fp_line (start 9.525 5.08) (end 9.525 -10.795) (layer B.SilkS) (width 0.15))
 """
     footer = \
 """
