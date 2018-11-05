@@ -5,7 +5,7 @@ D Six-Channel Digital Isolator, 150Mbps, 2.5-5.5V, SOIC-16
 K 6Ch 6In Quad Digital Isolator 150Mbps
 $ENDCMP
 #
-$CMP TE_406549-6
+$CMP TE-Connectivity-406549-6
 D RJ connector, 8P8C (8 positions 8 connected), two LEDs, Shielded
 K 8P8C RJ female connector led
 F ~
