@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+class Shape:
+    CIRCLE = "circle"
+    RECT = "rect"
+
 #
 # Python class representing a pad in a KiCad footprint
 #
@@ -7,14 +11,18 @@ class Pad:
     def __init__(
             self,
             designator,
-            type="thru_hole circle",
+            through_hole=True,
+            plated=True,
+            shape=Shape.CIRCLE,
             at=(0.0, 0.0),
             size=(0.0, 0.0),
             drill=1.0,
             layers="*.Cu *.Mask"
             ):
         self.designator = designator
-        self.type = type
+        self.through_hole = through_hole
+        self.plated = plated
+        self.shape = shape
         self.at = at
         self.size = size
         self.drill = drill
@@ -32,12 +40,21 @@ class Pad:
     def getSizeY(self):
         return self.size[1]
 
+    def getType(self):
+        type = "smd"
+        if self.through_hole:
+            if self.plated:
+                type = "thru_hole"
+            else:
+                type = "np_thru_hole"
+        return type
+
     # Stringify pad object
     def __str__(self):
         return "  (pad " \
                 + str(self.designator) \
-                + " " \
-                + self.type \
+                + " " + self.getType() \
+                + " " + self.shape \
                 + " (at " + str(self.getX()) + " " + str(self.getY()) + ") " \
                 + "(size " + str(self.getSizeX()) + " " + str(self.getSizeY()) + ") " \
                 + "(drill " + str(self.drill) + ") " \
