@@ -1,8 +1,13 @@
 #!/usr/bin/python
 
+
+#
+# Possible pad shapes
+#
 class Shape:
     CIRCLE = "circle"
     RECT = "rect"
+
 
 #
 # Python class representing a pad in a KiCad footprint
