@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from os.path import exists
-from pads import Pad
+from pads import *
 
 filename="TE-Connectivity-406549-6.kicad_mod"
 
@@ -70,7 +70,9 @@ y = 0.0
 # Two holes
 H2 = Pad(
         designator = "H2",
-        type = "np_thru_hole circle",
+        through_hole = True,
+        plated = False,
+        shape = Shape.CIRCLE,
         at = (x, y),
         size = (3.5, 3.5),
         drill = 3.5
@@ -78,7 +80,9 @@ H2 = Pad(
 
 H1 = Pad(
         designator = "H1",
-        type = "np_thru_hole circle",
+        through_hole = True,
+        plated = False,
+        shape = Shape.CIRCLE,
         at = (H2.getX() + 12.7, H2.getY()),
         size = H2.size,
         drill = H2.drill
@@ -87,6 +91,9 @@ H1 = Pad(
 # Two shielding connectors
 SH2 = Pad(
         designator = "SH2",
+        through_hole = True,
+        plated = True,
+        shape = Shape.CIRCLE,
         at = (H2.getX() - 1.78, H2.getY() - 3.43),
         size = (2.4, 2.4),
         drill = 1.57 + 0.08
@@ -94,6 +101,9 @@ SH2 = Pad(
 
 SH1 = Pad(
         designator = "SH1",
+        through_hole = True,
+        plated = True,
+        shape = Shape.CIRCLE,
         at = (H1.getX() + 1.78, H1.getY() - 3.43),
         size = SH2.size,
         drill = SH2.drill
@@ -105,6 +115,9 @@ pad = [None for i in range(13)]
 # Begin with pad 8
 pad[8] = Pad(
             designator = 8,
+            through_hole = True,
+            plated = True,
+            shape = Shape.CIRCLE,
             at = (H2.getX() + 2.79, H2.getY() - 2.54 - 1.78),
             size = (1.6, 1.6),
             drill = 0.89 + 0.08
@@ -115,6 +128,9 @@ counter = 1
 for i in [6, 4, 2]:
     pad[i] = Pad(
                 designator = i,
+                through_hole = True,
+                plated = True,
+                shape = Shape.CIRCLE,
                 at = (pad[8].getX() + counter*2.03, pad[8].getY()),
                 size = pad[8].size,
                 drill = pad[8].drill
@@ -126,6 +142,9 @@ counter = 1
 for i in [7, 5, 3, 1]:
     pad[i] = Pad(
                 designator = i,
+                through_hole = True,
+                plated = True,
+                shape = Shape.CIRCLE,
                 at = (pad[8].getX() + (counter-0.5)*2.03, H2.getY() - 2.54),
                 size = pad[8].size,
                 drill = pad[8].drill 
@@ -135,6 +154,9 @@ for i in [7, 5, 3, 1]:
 # Add LED pads
 pad[12] = Pad(
             designator = 12,
+            through_hole = True,
+            plated = True,
+            shape = Shape.CIRCLE,
             at = (H2.getX() - 0.51, H2.getY() - 9.14),
             size = pad[8].size,
             drill = pad[8].drill
@@ -142,6 +164,9 @@ pad[12] = Pad(
 
 pad[11] = Pad(
             designator = 11,
+            through_hole = True,
+            plated = True,
+            shape = Shape.CIRCLE,
             at = (pad[12].getX() + 2.29, pad[12].getY()),
             size = pad[12].size,
             drill = pad[12].drill
@@ -149,6 +174,9 @@ pad[11] = Pad(
 
 pad[9] = Pad(
             designator = 9,
+            through_hole = True,
+            plated = True,
+            shape = Shape.CIRCLE,
             at = (pad[12].getX() + 13.72, pad[12].getY()),
             size = pad[12].size,
             drill = pad[12].drill
@@ -156,6 +184,9 @@ pad[9] = Pad(
 
 pad[10] = Pad(
             designator = 10,
+            through_hole = True,
+            plated = True,
+            shape = Shape.CIRCLE,
             at = (pad[9].getX() -2.29, pad[12].getY()),
             size = pad[12].size,
             drill = pad[12].drill
