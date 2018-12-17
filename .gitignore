@@ -5,4 +5,5 @@
 
 # Python binaries
 *.pyc
+__pycache__
 
