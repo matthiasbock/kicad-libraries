@@ -4,6 +4,10 @@ $CMP EPM3064A
 D Altera MAX3000A CPLD with 64 macrocells
 $ENDCMP
 #
+$CMP PI3VT3245-A
+D Pericom 8-Bit, 2-Port Low Voltage Translator Bus Switch
+$ENDCMP
+#
 $CMP Si8660
 D Six-Channel Digital Isolator, 150Mbps, 2.5-5.5V, SOIC-16
 K 6Ch 6In Quad Digital Isolator 150Mbps
