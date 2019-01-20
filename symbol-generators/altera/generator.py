@@ -36,7 +36,7 @@ for line in csv.split("\n"):
 print(pins)
 
 # Create new symbol
-symbol = Symbol(name, "B") 
+symbol = Symbol(name, "U")
 
 startY = 550
 y = startY
