@@ -38,13 +38,13 @@ y = startY
 for pin in pins:
     if pin["number"] % 2 != 0:
         x = -350
-        o = PIN_ORIENTATION_RIGHT
+        o = PIN_DIRECTION_RIGHT
         y -= 100
     else:
         x = 350
-        o  = PIN_ORIENTATION_LEFT
+        o  = PIN_DIRECTION_LEFT
 
-    newPin = Pin(number=pin["number"], designator=pin["designator"], x=x, y=y, orientation=o, pinType=pin["pinType"])
+    newPin = Pin(number=pin["number"], designator=pin["designator"], x=x, y=y, direction=o, pinType=pin["pinType"])
     symbol.addElement(newPin)
 
 bottomY = y
