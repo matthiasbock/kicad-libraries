@@ -4,23 +4,23 @@
 # Adds a pin to the symbol
 #
 class Pin:
-    def __init__(self, number, designator, x, y, orientation, pinType):
+    def __init__(self, number, designator, x, y, direction, pinType):
         self.number = number
         self.designator = designator
         self.x = x
         self.y = y
-        self.orientation = orientation
+        self.direction = direction
         self.pinType = pinType
 
     def __str__(self):
-        return "X " + self.designator + " " + str(self.number) + " " + str(self.x) + " " + str(self.y) + " 100 " + self.orientation + " 50 50 1 1 " + self.pinType + "\n"
+        return "X " + self.designator + " " + str(self.number) + " " + str(self.x) + " " + str(self.y) + " 100 " + self.direction + " 50 50 1 1 " + self.pinType + "\n"
 
 
 #
 # Some helper constants for the configurable pin attributes
 #
-PIN_ORIENTATION_LEFT = "L"
-PIN_ORIENTATION_RIGHT = "R"
+PIN_DIRECTION_LEFT = "L"
+PIN_DIRECTION_RIGHT = "R"
 
 PIN_TYPE_INPUT = "I"
 PIN_TYPE_OUTPUT = "O"
