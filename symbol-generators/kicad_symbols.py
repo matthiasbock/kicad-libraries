@@ -13,6 +13,8 @@ class Pin:
         self.pinType = pinType
 
     def __str__(self):
+        while self.designator.find(" ") > -1:
+            self.designator = self.designator.replace(" ", "_")
         return "X " + self.designator + " " + str(self.number) + " " + str(self.x) + " " + str(self.y) + " 100 " + self.direction + " 50 50 1 1 " + self.pinType + "\n"
 
 
@@ -21,6 +23,8 @@ class Pin:
 #
 PIN_DIRECTION_LEFT = "L"
 PIN_DIRECTION_RIGHT = "R"
+PIN_DIRECTION_UP = "U"
+PIN_DIRECTION_DOWN = "D"
 
 PIN_TYPE_INPUT = "I"
 PIN_TYPE_OUTPUT = "O"
