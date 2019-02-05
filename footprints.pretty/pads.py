@@ -56,15 +56,20 @@ class Pad:
 
     # Stringify pad object
     def __str__(self):
+        # Only append drill hole size, if the pad is through-hole
+        drill = ""
+        if self.through_hole:
+            drill = "(drill {:.2f}) ".format(self.drill)
+
         return "  (pad " \
                 + str(self.designator) \
                 + " " + self.getType() \
                 + " " + self.shape \
-                + " (at {:.2f} {:.2f}) (size {:.2f} {:.2f}) (drill {:.2f}) ".format(
+                + " (at {:.2f} {:.2f}) (size {:.2f} {:.2f}) ".format(
                     self.getX(),
                     self.getY(),
                     self.getSizeX(),
-                    self.getSizeY(),
-                    self.drill
+                    self.getSizeY()
                     ) \
+                + drill \
                 + "(layers " + self.layers + "))"
