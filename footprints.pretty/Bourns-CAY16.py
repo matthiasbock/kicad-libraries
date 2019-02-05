@@ -54,12 +54,12 @@ for i in range(int(padCount/2)):
     # Create pad object
     newPad = Pad(
             designator = str(i+1),
-            through_hole = True,
+            through_hole = False,
             plated = True,
             shape = Shape.RECT,
             at = (x, y),
             size = (padWidth, padHeight),
-            drill = 0.0
+            layers = "F.Cu F.Paste F.Mask"
             )
     # Append pad to list of pads
     pads += [newPad]
@@ -73,12 +73,12 @@ for i in range(int(padCount/2)):
     # Create pad object
     newPad = Pad(
             designator = str(int(padCount/2)+1+i),
-            through_hole = True,
+            through_hole = False,
             plated = True,
             shape = Shape.RECT,
             at = (x, y),
             size = (padWidth, padHeight),
-            drill = 0.0
+            layers = "F.Cu F.Paste F.Mask"
             )
     # Append pad to list of pads
     pads += [newPad]
