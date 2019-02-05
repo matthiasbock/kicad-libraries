@@ -60,7 +60,11 @@ class Pad:
                 + str(self.designator) \
                 + " " + self.getType() \
                 + " " + self.shape \
-                + " (at " + str(self.getX()) + " " + str(self.getY()) + ") " \
-                + "(size " + str(self.getSizeX()) + " " + str(self.getSizeY()) + ") " \
-                + "(drill " + str(self.drill) + ") " \
+                + " (at {:.2f} {:.2f}) (size {:.2f} {:.2f}) (drill {:.2f}) ".format(
+                    self.getX(),
+                    self.getY(),
+                    self.getSizeX(),
+                    self.getSizeY(),
+                    self.drill
+                    ) \
                 + "(layers " + self.layers + "))"
