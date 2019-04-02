@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from os.path import exists
-from pads import *
+from pad import *
 
 filename="TE-Connectivity-406549-6.kicad_mod"
 

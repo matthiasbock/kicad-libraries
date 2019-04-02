@@ -9,7 +9,7 @@ padWidth = 1.6
 
 
 from os.path import exists
-from pads import *
+from pad import *
 
 filename="iCEstick.kicad_mod"
 

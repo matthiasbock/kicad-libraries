@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from os.path import exists
-from pads import *
+from pad import *
 
 
 filename="Bourns-CAY16.kicad_mod"
