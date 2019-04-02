@@ -66,6 +66,7 @@ class Wuerth_WR_FPC:
         outerPad = Pad(
                 designator = "MP",
                 through_hole = False,
+                layers = "F.Cu F.Mask",
                 plated = True,
                 shape = Shape.RECT,
                 at = (x, y),
@@ -80,6 +81,7 @@ class Wuerth_WR_FPC:
             pad = Pad(
                     designator = str(pin+1),
                     through_hole = False,
+                    layers = "F.Cu F.Mask",
                     plated = True,
                     shape = Shape.RECT,
                     at = (x, y),
@@ -95,6 +97,7 @@ class Wuerth_WR_FPC:
         outerPad = Pad(
                 designator = "MP",
                 through_hole = False,
+                layers = "F.Cu F.Mask",
                 plated = True,
                 shape = Shape.RECT,
                 at = (x, y),
