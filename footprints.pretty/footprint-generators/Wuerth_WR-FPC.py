@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import os
 from footprint import *
 from pad import *
 
@@ -9,6 +10,8 @@ from pad import *
 # SMT, ZIF, bottom contact, 0.50mm pin distance
 #
 class Wuerth_WR_FPC:
+    availablePinCounts = [6, 8, 10, 12, 14, 16, 17, 18, 20, 22, 24, 26, 28, 30, 32, 33, 34, 35, 40, 44, 45, 50]
+
     def __init__(self, pinCount):
         self.pinCount = pinCount
         self.generate()
@@ -23,7 +26,13 @@ class Wuerth_WR_FPC:
     # Generate a footprint name
     #
     def getName(self):
-        return "Wuerth WR-FPC {:s}".format(self.getPartNumber())
+        return "Wuerth {:s}".format(self.getPartNumber())
+
+    #
+    # Generate an appropriate filename
+    #
+    def getFilename(self):
+        return "Wuerth_{:s}_1x{:02d}_1MP_P0.5mm_Horizontal".format(self.getPartNumber(), self.pinCount) + ".kicad_mod"
 
     #
     # Add some primitives to the canvas
@@ -47,11 +56,15 @@ class Wuerth_WR_FPC:
         # KiCad increases Y downwards
         outerToInnerPadDeltaY = -outerToInnerPadDeltaY
 
-        # Generate pads
-        x = 0
-        y = 0
+        # Center the footprint
+        startX = -outerToInnerPadDeltaX - (self.pinCount/2 - 1/2) * pinSpacing
+        startY = 0
+
+        # Add M1
+        x = startX
+        y = startY
         outerPad = Pad(
-                designator = "M1",
+                designator = "MP",
                 through_hole = False,
                 plated = True,
                 shape = Shape.RECT,
@@ -62,6 +75,7 @@ class Wuerth_WR_FPC:
         x += outerToInnerPadDeltaX
         y += outerToInnerPadDeltaY
 
+        # Add all the pins
         for pin in range(self.pinCount):
             pad = Pad(
                     designator = str(pin+1),
@@ -75,11 +89,11 @@ class Wuerth_WR_FPC:
             if pin < self.pinCount-1:
                 x += pinSpacing
 
+        # Add M2
         x += outerToInnerPadDeltaX
         y -= outerToInnerPadDeltaY
-
         outerPad = Pad(
-                designator = "M2",
+                designator = "MP",
                 through_hole = False,
                 plated = True,
                 shape = Shape.RECT,
@@ -95,10 +109,14 @@ class Wuerth_WR_FPC:
         self.footprint.saveAs(filename)
 
     def save(self):
-        self.saveAs(self.getName().replace(" ","_") + ".kicad_mod")
+        self.saveAs(self.getFilename())
 
 
 
 if __name__ == "__main__":
-    header = Wuerth_WR_FPC(20)
-    header.save()
+    # Move to footprint storage folder
+    os.chdir(os.path.join(os.getcwd(), ".."))
+
+    # Generate footprints for all available connectors in the series
+    for pinCount in Wuerth_WR_FPC.availablePinCounts:
+        Wuerth_WR_FPC(pinCount).save()
