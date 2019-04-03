@@ -3,6 +3,7 @@
 import os
 from footprint import *
 from pad import *
+from line import *
 
 
 #
@@ -48,13 +49,29 @@ class Wuerth_WR_FPC:
         outerToInnerPadDeltaX = 0.80
         outerToInnerPadDeltaY = 1.20
         pinSpacing     = 0.50
+        lineWidth      = 0.15
+
+        # Margin between courtyard and silkscreen marking
+        margin = {
+            "top": innerPadHeight + 0.50,
+            # Leave some space for convenient cable plugging
+            "bottom": 15.00,
+            "left": 0.50,
+            "right": 0.50
+            }
+
+        # Parameters in the datasheet
+        A = pinSpacing * pinCount
+        # Component width
+        B = A + 4.6
+        C = A + 1.1
+
+        # Component height
+        D = 5.80
 
         # Account for the fact that distance is measured from pad center to pad center
         outerToInnerPadDeltaX += outerPadWidth/2    # The inner pad width is already included in the value above
         outerToInnerPadDeltaY += outerPadHeight/2 + innerPadHeight/2
-
-        # KiCad increases Y downwards
-        outerToInnerPadDeltaY = -outerToInnerPadDeltaY
 
         # Center the footprint
         startX = -outerToInnerPadDeltaX - (self.pinCount/2 - 1/2) * pinSpacing
@@ -74,7 +91,7 @@ class Wuerth_WR_FPC:
                 )
         self.footprint.append(outerPad)
         x += outerToInnerPadDeltaX
-        y += outerToInnerPadDeltaY
+        y -= outerToInnerPadDeltaY
 
         # Add all the pins
         for pin in range(self.pinCount):
@@ -93,7 +110,7 @@ class Wuerth_WR_FPC:
 
         # Add M2
         x += outerToInnerPadDeltaX
-        y -= outerToInnerPadDeltaY
+        y += outerToInnerPadDeltaY
         outerPad = Pad(
                 designator = "MP",
                 through_hole = False,
@@ -104,6 +121,39 @@ class Wuerth_WR_FPC:
                 size = (outerPadWidth, outerPadHeight)
                 )
         self.footprint.append(outerPad)
+
+        # Add placement hint to silkscreen
+        layer = "F.SilkS"
+        x1 = -B/2
+        y1 = startY - outerToInnerPadDeltaY + innerPadHeight/2
+        x2 = +B/2
+        y2 = y1 + D
+
+        lines = [
+            Line(x1, y1, x2, y1, layer, lineWidth),
+            Line(x2, y1, x2, y2, layer, lineWidth),
+            Line(x2, y2, x1, y2, layer, lineWidth),
+            Line(x1, y2, x1, y1, layer, lineWidth)
+            ]
+        for line in lines:
+            self.footprint.append(line)
+
+        # Add outline to courtyard layer
+        layer = "F.CrtYd"
+        x1 -= margin["left"]
+        y1 -= margin["top"]
+        x2 += margin["right"]
+        y2 += margin["bottom"]
+
+        lines = [
+            Line(x1, y1, x2, y1, layer, lineWidth),
+            Line(x2, y1, x2, y2, layer, lineWidth),
+            Line(x2, y2, x1, y2, layer, lineWidth),
+            Line(x1, y2, x1, y1, layer, lineWidth)
+            ]
+        for line in lines:
+            self.footprint.append(line)
+
 
     #
     # Save the generated footprint to file
