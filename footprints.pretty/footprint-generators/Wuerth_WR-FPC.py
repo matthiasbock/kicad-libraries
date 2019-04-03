@@ -51,6 +51,9 @@ class Wuerth_WR_FPC:
         outerToInnerPadDeltaY = 1.20
         pinSpacing     = 0.50
         lineWidth      = 0.15
+        padLayers      = "F.Cu F.Mask"
+        if not self.handsolder:
+            padLayers += " F.Paste"
 
         # Margin between courtyard and silkscreen marking
         margin = {
@@ -96,7 +99,7 @@ class Wuerth_WR_FPC:
         outerPad = Pad(
                 designator = "MP",
                 through_hole = False,
-                layers = "F.Cu F.Mask",
+                layers = padLayers,
                 plated = True,
                 shape = Shape.RECT,
                 at = (x, y),
@@ -111,7 +114,7 @@ class Wuerth_WR_FPC:
             pad = Pad(
                     designator = str(pin+1),
                     through_hole = False,
-                    layers = "F.Cu F.Mask",
+                    layers = padLayers,
                     plated = True,
                     shape = Shape.RECT,
                     at = (x, y),
@@ -127,7 +130,7 @@ class Wuerth_WR_FPC:
         outerPad = Pad(
                 designator = "MP",
                 through_hole = False,
-                layers = "F.Cu F.Mask",
+                layers = padLayers,
                 plated = True,
                 shape = Shape.RECT,
                 at = (x, y),

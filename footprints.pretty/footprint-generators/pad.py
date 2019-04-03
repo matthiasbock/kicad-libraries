@@ -22,7 +22,7 @@ class Pad:
             at=(0.0, 0.0),
             size=(0.0, 0.0),
             drill=1.0,
-            layers="*.Cu *.Mask"
+            layers="*.Cu *.Mask *.Paste"
             ):
         self.designator = designator
         self.through_hole = through_hole
