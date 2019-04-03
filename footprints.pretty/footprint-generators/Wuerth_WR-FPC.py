@@ -13,8 +13,9 @@ from line import *
 class Wuerth_WR_FPC:
     availablePinCounts = [6, 8, 10, 12, 14, 16, 17, 18, 20, 22, 24, 26, 28, 30, 32, 33, 34, 35, 40, 44, 45, 50]
 
-    def __init__(self, pinCount):
+    def __init__(self, pinCount, handsolder=False):
         self.pinCount = pinCount
+        self.handsolder = handsolder
         self.generate()
 
     #
@@ -33,7 +34,7 @@ class Wuerth_WR_FPC:
     # Generate an appropriate filename
     #
     def getFilename(self):
-        return "Wuerth_{:s}_1x{:02d}-1MP_P0.5mm_Horizontal".format(self.getPartNumber(), self.pinCount) + ".kicad_mod"
+        return "Wuerth_{:s}_1x{:02d}-1MP_P0.5mm_Horizontal{:s}".format(self.getPartNumber(), self.pinCount, ("_Handsolder" if self.handsolder else "")) + ".kicad_mod"
 
     #
     # Add some primitives to the canvas
@@ -72,6 +73,18 @@ class Wuerth_WR_FPC:
         # Account for the fact that distance is measured from pad center to pad center
         outerToInnerPadDeltaX += outerPadWidth/2    # The inner pad width is already included in the value above
         outerToInnerPadDeltaY += outerPadHeight/2 + innerPadHeight/2
+
+        if self.handsolder:
+            # Extend outer pads further out
+            outerPadWidth += 1.00
+            outerToInnerPadDeltaX += 0.5
+            margin["left"] += 1.00
+            margin["right"] += 1.00
+
+            # Elongate inner pads
+            innerPadHeight += 1.00
+            outerToInnerPadDeltaY += 0.50
+            margin["top"] += 1.00
 
         # Center the footprint
         startX = -outerToInnerPadDeltaX - (self.pinCount/2 - 1/2) * pinSpacing
@@ -171,5 +184,6 @@ if __name__ == "__main__":
     os.chdir(os.path.join(os.getcwd(), ".."))
 
     # Generate footprints for all available connectors in the series
-    for pinCount in Wuerth_WR_FPC.availablePinCounts:
-        Wuerth_WR_FPC(pinCount).save()
+    for handsolder in [False, True]:
+        for pinCount in Wuerth_WR_FPC.availablePinCounts:
+            Wuerth_WR_FPC(pinCount, handsolder).save()
