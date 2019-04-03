@@ -33,7 +33,7 @@ class Wuerth_WR_FPC:
     # Generate an appropriate filename
     #
     def getFilename(self):
-        return "Wuerth_{:s}_1x{:02d}_1MP_P0.5mm_Horizontal".format(self.getPartNumber(), self.pinCount) + ".kicad_mod"
+        return "Wuerth_{:s}_1x{:02d}-1MP_P0.5mm_Horizontal".format(self.getPartNumber(), self.pinCount) + ".kicad_mod"
 
     #
     # Add some primitives to the canvas
